@@ -76,6 +76,7 @@ int		main(void)
 	TEST("%x %#X %S %s%s\n", 1000, 1000, L"ݗݜशব", "test", "test2");
 	TEST("%s%s%s\n", "test", "test", "test");
 	TEST("%C\n", 15000);
+	TEST("{%c}", NULL)
 	TEST("111%s333%s555%saaa%sccc", "222", "444", "666", "bbb");
 	TEST("%O%O%O%O%O", 1, 100, 999, 42, 999988888);
 	return (0);
