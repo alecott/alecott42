@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:21:28 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/29 17:22:38 by alecott          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:02:19 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 static void		ft_piecex(t_filler *info, int i, int j, char *line)
 {
-	char	*tmp;
+	char	*test;
 	int		x;
 
 	x = 0;
 	while (line[j] <= '9' && line[j] >= '0')
 		j++;
-	tmp = (char*)malloc(sizeof(char) * (j - i + 1));
+	test = (char*)ft_memalloc(sizeof(char) * (j - i + 1));
+	ft_putendl_fd(test, 2);
 	while (i < j)
 	{
-		tmp[x] = line[i];
+		test[x] = line[i];
 		i++;
 		x++;
 	}
-	tmp[i] = '\0';
-	info->piecex = ft_atoi(tmp);
-	ft_strdel(&tmp);
+	test[i] = '\0';
+	info->piecex = ft_atoi(test);
+	ft_strdel(&test);
 }
 
 static void		ft_piecey(t_filler *info)
@@ -42,6 +43,8 @@ static void		ft_piecey(t_filler *info)
 	j = 6;
 	i = 6;
 	get_next_line(0, &line);
+	if (line == NULL)
+		return ;
 	while (line[j] <= '9' && line[j] >= '0')
 		j++;
 	tmp = (char*)malloc(sizeof(char) * (j - 5));

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 10:03:46 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/29 17:17:50 by alecott          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:02:22 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,26 @@ static int		ft_mapy(t_filler *info)
 	return (1);
 }
 
+static void		ft_freeinfo(t_filler *info)
+{
+	int		i;
+
+	i = 0;
+	while (i < info->mapy)
+	{
+		ft_strdel(&info->map[i]);
+		i++;
+	}
+	free(info->map);
+	i = 0;
+	while (i < info->piecey)
+	{
+		ft_strdel(&info->map[i]);
+		i++;
+	}
+	free(info->piece);
+}
+
 int				main(void)
 {
 	t_filler	*info;
@@ -81,12 +101,19 @@ int				main(void)
 	while (1)
 	{
 		if (!(ft_mapy(info)))
+		{
+			ft_freeinfo(info);
+			free(info);
 			break ;
+		}
 		ft_map(info);
 		ft_piece(info);
 		if (!(ft_placement(info)))
+		{
+			ft_freeinfo(info);
+			free(info);
 			break ;
+		}
 	}
-	free(info);
 	return (0);
 }
