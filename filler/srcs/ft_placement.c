@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 14:43:25 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/27 18:31:41 by alecott          ###   ########.fr       */
+/*   Updated: 2018/01/31 18:46:17 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,29 @@ static int		ft_check2(t_filler *info, int ip, int jp)
 {
 	int		i;
 	int		j;
+	int		x;
 
+	x = 0;
 	i = 0;
 	j = 0;
 	while (info->piece[i])
 	{
 		while (info->piece[i][j] != '\0')
 		{
-			if (info->piece[i][j] == '*')
-			{
-				if ((i != ip || j != jp) &&
-						info->map[info->y + (i - ip)][info->x + (j - jp)]
-						!= '.')
-					return (0);
-			}
+			if (info->piece[i][j] == '*' &&
+		info->map[info->y + (i - ip)][info->x + (j - jp)] != info->team
+		&& info->map[info->y + (i - ip)][info->x + (j - jp)] != '.')
+				return (0);
+			else if (info->piece[i][j] == '*' &&
+					info->map[info->y + (i - ip)][info->x + (j - jp)]
+					== info->team)
+				x++;
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	return (1);
+	return (x);
 }
 
 static void		dlst_add(t_daewae **queen, t_daewae *uganda)
@@ -65,7 +68,7 @@ static void		ft_check(t_filler *info, t_daewae **d)
 			if (info->piece[i][j] == '*' && info->x >= j && info->y >= i &&
 					info->mapx - info->x >= info->piecex - j &&
 					info->mapy - info->y >= info->piecey - i &&
-					ft_check2(info, i, j))
+					ft_check2(info, i, j) == 1)
 			{
 				tmp = ft_memalloc(sizeof(t_daewae));
 				tmp->x = info->x - j;
