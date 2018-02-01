@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:21:28 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/31 18:02:19 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/01 11:29:14 by briviere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void		ft_piecex(t_filler *info, int i, int j, char *line)
 	while (line[j] <= '9' && line[j] >= '0')
 		j++;
 	test = (char*)ft_memalloc(sizeof(char) * (j - i + 1));
-	ft_putendl_fd(test, 2);
 	while (i < j)
 	{
 		test[x] = line[i];
