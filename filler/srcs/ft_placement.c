@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 14:43:25 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/31 18:46:17 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/01 12:51:02 by briviere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void		dlst_add(t_daewae **queen, t_daewae *uganda)
 		return ;
 	}
 	uganda->next = *queen;
-	uganda->next->prev = uganda;
 	*queen = uganda;
 }
 
@@ -105,6 +104,8 @@ static int		ft_choose_wisely(t_filler *info, t_daewae *d)
 int				ft_placement(t_filler *info)
 {
 	t_daewae	*d;
+	t_daewae	*tmp;
+	int			res;
 
 	info->x = 0;
 	info->y = 0;
@@ -120,5 +121,12 @@ int				ft_placement(t_filler *info)
 		info->x = 0;
 		info->y = info->y + 1;
 	}
-	return (ft_choose_wisely(info, d));
+	res = ft_choose_wisely(info, d);
+	while (d)
+	{
+		tmp = d->next;
+		ft_memdel((void **)&d);
+		d = tmp;
+	}
+	return (res);
 }
