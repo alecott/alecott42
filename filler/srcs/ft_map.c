@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:07:30 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/27 18:26:32 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/01 12:52:03 by briviere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_map(t_filler *info)
 	i = 0;
 	get_next_line(0, &line);
 	ft_strdel(&line);
-	info->map = (char**)malloc(sizeof(char*) * info->mapy + 1);
+	info->map = (char**)malloc(sizeof(char*) * (info->mapy + 1));
 	while (i < info->mapy)
 	{
 		get_next_line(0, &line);
