@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 10:03:46 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/31 18:02:22 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/01 13:00:33 by briviere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,41 +79,40 @@ static void		ft_freeinfo(t_filler *info)
 	i = 0;
 	while (i < info->mapy)
 	{
-		ft_strdel(&info->map[i]);
+		ft_strdel(info->map + i);
 		i++;
 	}
-	free(info->map);
+	ft_memdel((void**)&info->map);
 	i = 0;
 	while (i < info->piecey)
 	{
-		ft_strdel(&info->map[i]);
+		ft_strdel(info->piece + i);
 		i++;
 	}
-	free(info->piece);
+	ft_memdel((void**)&info->piece);
 }
 
 int				main(void)
 {
-	t_filler	*info;
+	t_filler	info;
 
-	info = (t_filler*)malloc(sizeof(t_filler));
-	ft_player_team_s(info);
+	ft_bzero(&info, sizeof(t_filler));
+	ft_player_team_s(&info);
 	while (1)
 	{
-		if (!(ft_mapy(info)))
+		if (!(ft_mapy(&info)))
 		{
-			ft_freeinfo(info);
-			free(info);
+			ft_freeinfo(&info);
 			break ;
 		}
-		ft_map(info);
-		ft_piece(info);
-		if (!(ft_placement(info)))
+		ft_map(&info);
+		ft_piece(&info);
+		if (!(ft_placement(&info)))
 		{
-			ft_freeinfo(info);
-			free(info);
+			ft_freeinfo(&info);
 			break ;
 		}
+		ft_freeinfo(&info);
 	}
 	return (0);
 }

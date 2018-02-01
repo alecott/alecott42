@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 11:37:42 by alecott           #+#    #+#             */
-/*   Updated: 2018/01/31 14:30:18 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/01 11:20:43 by briviere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct	s_daewae
 	int				x;
 	int				y;
 	struct s_daewae	*next;
-	struct s_daewae	*prev;
 }				t_daewae;
 
 void			ft_map(t_filler *info);
