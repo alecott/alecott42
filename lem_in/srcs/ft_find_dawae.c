@@ -41,12 +41,36 @@ static void	ft_luigi(t_bfs *rooms)
 
 static void	ft_actuals(t_bfs *rooms, t_ants *info)
 {
+	int		i;
 
+	i = 0;
+	while (rooms->news[i])
+	{
+		
+		i++;
+	}
 }
 
 static void	ft_olds(t_bfs *rooms, t_ants *info)
 {
+	char	**tmp;
+	int		i;
 
+	i = 0;
+	tmp = ft_tabjoin(rooms->olds, rooms->actuals);
+	while (rooms->olds[i])
+	{
+		ft_strdel(&rooms->olds[i]);
+		i++;
+	}
+	ft_memdel((void**)rooms->olds);
+	rooms->olds = tmp;
+	while (tmp[i])
+	{
+		ft_strdel(&tmp[i]);
+		i++;
+	}
+	ft_memdel((void**)tmp);
 	ft_actuals(rooms, info);
 }
 
@@ -54,20 +78,29 @@ static void	ft_news(t_bfs *rooms, t_ants *info)
 {
 	int		i;
 	int		j;
+	int		n;
 
 	i = 0;
-	
+	n = 1;
+	rooms->actuals = (char**)ft_memalloc(sizeof(char*) * n);
 	while (rooms->actuals[i])
 	{
 		j = 0;
 		while (info->tubes[j])
 		{
-			
-			
+			if (ft_strstr(info->tubes[j], rooms->actuals[i]) &&
+			!(ft_tabstr(rooms->olds, info->tubes[j], 2) &&
+			!(ft_tabstr(rooms->actuals, info->tubes[j], 2))))
+			{
+				rooms->actuals[n - 1] = info->tubes[j];
+				n++;
+				rooms->actuals = ft_realloc(rooms->actuals, n, n + 1);
+			}
 			j++;
 		}
 		i++;
 	}
+	rooms->actuals[n] = NULL;
 	ft_olds(rooms, info);
 }
 
@@ -93,4 +126,4 @@ void		ft_find_dawae(t_ants *info, int ants, int end, int start)
 		ft_luigi(&rooms);
 		ft_news(&rooms, info);
 	}
-}	
+}
