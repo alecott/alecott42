@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 09:33:30 by alecott           #+#    #+#              #
-#    Updated: 2018/02/01 11:41:50 by briviere         ###   ########.fr        #
+#    Updated: 2018/02/01 13:28:49 by alecott          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB = $(addprefix $(LIB_PATH), $(LIB_NAME))
 
 NAME = alecott.filler
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra
 
 INC = filler.h
 

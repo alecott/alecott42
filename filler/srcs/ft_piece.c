@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:21:28 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/01 11:29:14 by briviere         ###   ########.fr       */
+/*   Updated: 2018/02/01 13:15:51 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void			ft_piece(t_filler *info)
 
 	i = 0;
 	ft_piecey(info);
-	info->piece = (char**)malloc(sizeof(char*) * info->piecey + 1);
+	info->piece = (char**)malloc(sizeof(char*) * (info->piecey + 1));
 	while (i < info->piecey)
 	{
 		get_next_line(0, &line);
