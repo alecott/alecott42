@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 09:33:30 by alecott           #+#    #+#              #
-#    Updated: 2018/02/25 16:32:13 by alecott          ###   ########.fr        #
+#    Updated: 2018/02/27 13:45:38 by alecott          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INC = lem_in.h
 SRCS_PATH = ./srcs/
 
 ALL_SRCS = main.c ft_stock.c ft_names.c ft_error.c ft_BFS.c ft_link.c \
-		   ft_where_is_my_ant.c
+		   ft_where_is_my_ant.c ft_find_dawae.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(ALL_SRCS))
 
