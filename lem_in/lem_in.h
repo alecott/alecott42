@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 10:13:35 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/25 16:31:32 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/28 18:40:08 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ int		ft_stock(t_ants *info);
 void	ft_names(t_ants *info);
 void	ft_BFS(t_ants *info);
 int		ft_error(t_ants *info);
-void	ft_find_dawae(t_ants *info, int ants, int end, int start);
+char	*ft_find_dawae(t_ants *info, int ants, int end, int start);
 char	*ft_link(char *room, char *tube, t_ants *info);
 char	*ft_where_is_my_ant(t_ants *info, int ants, int end, int start);
+int		ft_room_number(t_ants *info, char *room);
+int		ft_norm(t_ants *info, int *i, int *j, int *n);
 
 #endif

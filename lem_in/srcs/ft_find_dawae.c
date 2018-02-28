@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 13:19:12 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/28 14:02:51 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/28 18:30:15 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ static void	ft_actuals(t_bfs *rooms, t_ants *info)
 	j = 0;
 	i = 0;
 	n = 1;
+	ft_memdel((void**)&rooms->actuals);
 	rooms->actuals = (char **)malloc(sizeof(char *) * n);
 	while (info->names[i])
 	{
 		if (ft_tabstr(rooms->news, info->names[i],  1) &&
 			!ft_tabchr(rooms->olds, info->names[i]))
 		{
-			rooms->actuals[n - 1] = ft_strdup(info->names[i]);
+			rooms->actuals[n - 1] = info->names[i];
 			n++;
 			rooms->actuals = ft_realloc(rooms->actuals, sizeof(char *) * n, sizeof(char *) * (n + 1));
 		}
@@ -65,7 +66,7 @@ static void	ft_olds(t_bfs *rooms, t_ants *info)
 	i = 0;
 	tmp = ft_tabjoin(rooms->olds, rooms->actuals);
 	rooms->olds = tmp;
-	tmp = 0;
+	tmp = NULL;
 	ft_memdel((void **)&tmp);
 	ft_actuals(rooms, info);
 }
@@ -98,7 +99,7 @@ static void	ft_news(t_bfs *rooms, t_ants *info)
 	}
 }
 
-void		ft_find_dawae(t_ants *info, int ants, int end, int start)
+char		*ft_find_dawae(t_ants *info, int ants, int end, int start)
 {
 	int		i;
 	char	*str;
@@ -114,36 +115,15 @@ void		ft_find_dawae(t_ants *info, int ants, int end, int start)
 	rooms.olds[0] = NULL;
 	while (!ft_tabchr(rooms.actuals, str))
 	{
-		i = 0;
-		ft_putendl("\n\n\nTOUR");
+		ft_luigi(&rooms);
 		ft_news(&rooms, info);
 		ft_olds(&rooms, info);
-		ft_putendl("\nNEWS:");
-		while (rooms.news[i])
-		{
-			if (i != 0)
-				write(1, " ", 1);
-			ft_putstr(rooms.news[i]);
-			i++;
-		}
-		i = 0;
-		ft_putendl("\nOLDS:");
-		while (rooms.olds[i])
-		{
-			if (i != 0)
-				write(1, " ", 1);
-			ft_putstr(rooms.olds[i]);
-			i++;
-		}
-		i = 0;
-		ft_putendl("\nACTUALS:");
-		while (rooms.actuals[i])
-		{
-			if (i != 0)
-				write(1, " ", 1);
-			ft_putstr(rooms.actuals[i]);
-			i++;
-		}
-		ft_luigi(&rooms);
 	}
+	while (rooms.news[i])
+	{
+		if (ft_strstr(rooms.news[i], str))
+			return (ft_link(str, rooms.news[i], info));
+		i++;
+	}
+	return (NULL);
 }

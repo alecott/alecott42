@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:50:21 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/28 13:12:11 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/28 13:38:22 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ static int	ft_search_wrong_tubes(char *str, t_ants *info)
 	return (0);
 }
 
+static int	ft_error3prev(t_ants *info, int *i, int *j, int *k)
+{
+	*k = 0;
+	*j = 0;
+	if (info->tubes[*i][0] == '#')
+		return (1);
+	while (info->tubes[*i][*j] && info->tubes[*i][*j] != '-')
+		*j = *j + 1;
+	*j = *j + 1;
+	while (info->tubes[*i][*j + *k])
+		*k = *k + 1;
+	return (0);
+}
+
 static int	ft_error3(t_ants *info)
 {
 	int		i;
@@ -38,15 +52,8 @@ static int	ft_error3(t_ants *info)
 	i = 0;
 	while (info->tubes[i])
 	{
-		k = 0;
-		j = 0;
-		if (info->tubes[i][0] == '#')
+		if (ft_error3prev(info, &i, &j, &k))
 			return (1);
-		while (info->tubes[i][j] && info->tubes[i][j] != '-')
-			j++;
-		j++;
-		while (info->tubes[i][j + k])
-			k++;
 		str = (char*)malloc(sizeof(char) * (k + 1));
 		k = 0;
 		while (info->tubes[i][j + k])
@@ -54,13 +61,9 @@ static int	ft_error3(t_ants *info)
 			str[k] = info->tubes[i][j + k];
 			k++;
 		}
-
 		str[k] = '\0';
 		if (!ft_search_wrong_tubes(str, info))
-		{
-			ft_putendl("i am here");
 			return (0);
-		}
 		ft_strdel(&str);
 		i++;
 	}
@@ -74,7 +77,6 @@ static int	ft_error2(t_ants *info)
 	char	*str;
 
 	i = 0;
-
 	while (info->tubes[i])
 	{
 		j = 0;
@@ -103,12 +105,7 @@ int			ft_error(t_ants *info)
 	int		j;
 	int		k;
 
-	i = ft_tablen(info->names);
-	j = 0;
-	n = 0;
-	if (info->nb_ant < 0)
-		return (0);
-	if (info->start == NULL || info->end == NULL)
+	if (!ft_norm(info, &i, &j, &n))
 		return (0);
 	while (info->names[j])
 	{
@@ -118,7 +115,7 @@ int			ft_error(t_ants *info)
 			if (ft_strstr(info->tubes[k], info->names[j]))
 			{
 				n++;
-				break;
+				break ;
 			}
 			k++;
 		}
