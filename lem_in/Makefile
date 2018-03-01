@@ -25,7 +25,8 @@ INC = lem_in.h
 SRCS_PATH = ./srcs/
 
 ALL_SRCS = main.c ft_stock.c ft_names.c ft_error.c ft_BFS.c ft_link.c \
-		   ft_where_is_my_ant.c ft_find_dawae.c ft_room_number.c ft_norm.c
+		   ft_where_is_my_ant.c ft_find_dawae.c ft_room_number.c ft_norm.c \
+		   ft_check_ant.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(ALL_SRCS))
 

@@ -44,5 +44,6 @@ char	*ft_link(char *room, char *tube, t_ants *info);
 char	*ft_where_is_my_ant(t_ants *info, int ants, int end, int start);
 int		ft_room_number(t_ants *info, char *room);
 int		ft_norm(t_ants *info, int *i, int *j, int *n);
+int		ft_check_ant(t_ants *info, char *room);
 
 #endif

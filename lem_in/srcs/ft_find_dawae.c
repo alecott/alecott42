@@ -14,9 +14,9 @@
 
 static void	ft_luigi(t_bfs *rooms)
 {
-	int		i;
+//	int		i;
 
-	i = 0;
+//	i = 0;
 //	while (rooms->olds[i])
 //	{
 //		ft_strdel(&rooms->olds[i]);
@@ -36,10 +36,8 @@ static void	ft_luigi(t_bfs *rooms)
 static void	ft_actuals(t_bfs *rooms, t_ants *info)
 {
 	int		i;
-	int		j;
 	int		n;
 
-	j = 0;
 	i = 0;
 	n = 1;
 	ft_memdel((void**)&rooms->actuals);
@@ -61,9 +59,7 @@ static void	ft_actuals(t_bfs *rooms, t_ants *info)
 static void	ft_olds(t_bfs *rooms, t_ants *info)
 {
 	char	**tmp;
-	int		i;
 
-	i = 0;
 	tmp = ft_tabjoin(rooms->olds, rooms->actuals);
 	rooms->olds = tmp;
 	tmp = NULL;
@@ -105,7 +101,6 @@ char		*ft_find_dawae(t_ants *info, int ants, int end, int start)
 	char	*str;
 	t_bfs	rooms;
 
-	i = 0;
 	ft_bzero(&rooms, sizeof(t_bfs));
 	str = ft_where_is_my_ant(info, ants, end, start);
 	rooms.actuals = (char **)ft_memalloc(sizeof(char *) * 2);
@@ -115,15 +110,23 @@ char		*ft_find_dawae(t_ants *info, int ants, int end, int start)
 	rooms.olds[0] = NULL;
 	while (!ft_tabchr(rooms.actuals, str))
 	{
+		i = 0;
 		ft_luigi(&rooms);
 		ft_news(&rooms, info);
+		while (rooms.news[i])
+		{
+			if (ft_strstr(rooms.news[i], str) &&
+			ft_check_ant(info, ft_link(str, rooms.news[i], info)))
+				return (ft_link(str, rooms.news[i], info));
+			i++;
+		}
 		ft_olds(&rooms, info);
 	}
-	while (rooms.news[i])
-	{
-		if (ft_strstr(rooms.news[i], str))
-			return (ft_link(str, rooms.news[i], info));
-		i++;
-	}
+//	while (rooms.news[i])
+//	{
+//		if (ft_strstr(rooms.news[i], str))
+//			return (ft_link(str, rooms.news[i], info));
+//		i++;
+//	}
 	return (NULL);
 }
