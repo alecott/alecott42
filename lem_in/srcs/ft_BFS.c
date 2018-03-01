@@ -29,23 +29,8 @@ static void	ft_make_room_state(t_ants *info, int start)
 	}
 }
 
-static void	ft_print(int ants, char *s1, char *s2, t_ants *info)
+static void	ft_print(int ants, char *s1)
 {
-	int		i;
-	int		j;
-
-	ft_putstr(" s1: ");
-	ft_putstr(s1);
-	ft_putstr(" s2: ");
-	ft_putstr(s2);
-	i = ft_tablen(info->names);
-	j = 0;
-	while (j < i)
-	{
-		ft_putnbr(info->rooms_state[j]);
-		j++;
-	}
-	write (1, " ", 1);
 	write (1, "L", 1);
 	ft_putnbr(ants);
 	write (1, "-", 1);
@@ -72,7 +57,7 @@ static void	ft_gestion(t_ants *info, int ants, int end, int start)
 		info->rooms_state[ft_room_number(info, s2)]--;
 	else
 		info->rooms_state[ft_room_number(info, s2)] = info->rooms_state[ft_room_number(info, s2)] - ants;
-	ft_print(ants, s1, s2, info);
+	ft_print(ants, s1);
 }
 
 void		ft_BFS(t_ants *info)
@@ -86,7 +71,7 @@ void		ft_BFS(t_ants *info)
 	ft_make_room_state(info, start);
 	while (info->rooms_state[end] != info->nb_ant)
 	{
-		ants = info->nb_ant;
+		ants = info->nb_ant - info->rooms_state[end];
 		while (ants > 0)
 		{
 			ft_gestion(info, ants, end, start);
