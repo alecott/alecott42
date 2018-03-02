@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 16:20:21 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/25 16:22:06 by alecott          ###   ########.fr       */
+/*   Updated: 2018/03/02 14:00:41 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_link(char *room, char *tube, t_ants *info)
 	i = 0;
 	while (info->names[i])
 	{
-		if (room != info->names[i] && ft_strstr(tube, info->names[i]))
+		if (room != info->names[i] && ft_tubestr(tube, info->names[i]))
 			return (info->names[i]);
 		i++;
 	}

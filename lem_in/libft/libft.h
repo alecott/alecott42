@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 08:48:09 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/25 14:02:31 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/28 11:11:30 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,7 @@ void			*ft_realloc(void *ptr, size_t prev_size, size_t new_size);
 char			**ft_tabjoin(char **tab1, char **tab2);
 int				ft_tabchr(char **tab, const char *s);
 int				ft_tabstr(char **tab, const char *s, int mode);
+void			ft_puttab(char **tab);
+char			**ft_tabdup(char **tab);
 
 #endif

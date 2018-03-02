@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 15:01:15 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/23 15:14:27 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/28 12:48:04 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,3 @@ void	*ft_realloc(void *ptr, size_t prev_size, size_t new_size)
 	free(ptr);
 	return (dst);
 }
-

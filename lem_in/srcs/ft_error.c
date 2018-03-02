@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:50:21 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/28 13:38:22 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/03/02 14:03:36 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static int	ft_error3(t_ants *info)
 		ft_strdel(&str);
 		i++;
 	}
-	return (1);
+//	return (1);
+	return (ft_verify(info->start, info->end, info));
 }
 
 static int	ft_error2(t_ants *info)
@@ -112,7 +113,7 @@ int			ft_error(t_ants *info)
 		k = 0;
 		while (info->tubes[k])
 		{
-			if (ft_strstr(info->tubes[k], info->names[j]))
+			if (ft_tubestr(info->tubes[k], info->names[j]))
 			{
 				n++;
 				break ;

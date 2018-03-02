@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/29 09:33:30 by alecott           #+#    #+#              #
-#    Updated: 2018/02/28 18:42:19 by alecott          ###   ########.fr        #
+#    Updated: 2018/03/02 13:45:49 by alecott          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS_PATH = ./srcs/
 
 ALL_SRCS = main.c ft_stock.c ft_names.c ft_error.c ft_BFS.c ft_link.c \
 		   ft_where_is_my_ant.c ft_find_dawae.c ft_room_number.c ft_norm.c \
-		   ft_check_ant.c
+		   ft_check_ant.c ft_tubestr.c ft_verify.c ft_test.c ft_test2.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(ALL_SRCS))
 

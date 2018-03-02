@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 12:16:18 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/25 14:00:06 by alecott          ###   ########.fr       */
+/*   Updated: 2018/02/27 15:27:14 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int		ft_tabstr(char **tab, const char *s, int mode)
 		while (tab[i])
 		{
 			if (ft_strstr(s, tab[i]))
+			{
 				return (1);
+			}
 			i++;
 		}
 	}

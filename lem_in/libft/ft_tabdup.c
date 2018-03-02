@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabjoin.c                                       :+:      :+:    :+:   */
+/*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/23 17:02:11 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/27 16:15:20 by alecott          ###   ########.fr       */
+/*   Created: 2018/02/27 20:17:57 by alecott           #+#    #+#             */
+/*   Updated: 2018/02/28 11:16:30 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_tabjoin(char **tab1, char **tab2)
+char	**ft_tabdup(char **tab)
 {
 	int		i;
-	int		j;
 	char	**ret;
 
 	i = 0;
-	j = 0;
-	if (tab1 == NULL || tab2 == NULL)
+	if ((ret = (char **)malloc(sizeof(char *) * (ft_tablen(tab) + 1))) == NULL)
 		return (NULL);
-	if ((ret = (char **)ft_memalloc(sizeof(char *) *
-			(ft_tablen(tab1) + ft_tablen(tab2) + 1))) == NULL)
-		return (NULL);
-	while (tab1[i])
+	while (tab[i])
 	{
-		ret[i] = tab1[i];
+		ret[i] = tab[i];
 		i++;
 	}
-	while (tab2[j])
-	{
-		ret[i + j] = tab2[j];
-		j++;
-	}
-	ret[i + j] = NULL;
+	tab[i] = NULL;
 	return (ret);
 }

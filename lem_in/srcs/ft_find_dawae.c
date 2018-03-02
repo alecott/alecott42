@@ -6,32 +6,11 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 13:19:12 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/28 18:30:15 by alecott          ###   ########.fr       */
+/*   Updated: 2018/03/02 17:12:00 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
-
-static void	ft_luigi(t_bfs *rooms)
-{
-//	int		i;
-
-//	i = 0;
-//	while (rooms->olds[i])
-//	{
-//		ft_strdel(&rooms->olds[i]);
-//		i++;
-//	}
-//	ft_memdel((void**)&rooms->olds);
-//	i = 0;
-//	while (rooms->actuals[i])
-//	{
-//		ft_strdel(&rooms->actuals[i]);
-//		i++;
-//	}
-//	ft_memdel((void**)&rooms->actuals);
-	ft_memdel((void**)&rooms->news);
-}
 
 static void	ft_actuals(t_bfs *rooms, t_ants *info)
 {
@@ -44,7 +23,7 @@ static void	ft_actuals(t_bfs *rooms, t_ants *info)
 	rooms->actuals = (char **)malloc(sizeof(char *) * n);
 	while (info->names[i])
 	{
-		if (ft_tabstr(rooms->news, info->names[i],  1) &&
+		if (ft_test2(rooms->news, info->names[i]) &&
 			!ft_tabchr(rooms->olds, info->names[i]))
 		{
 			rooms->actuals[n - 1] = info->names[i];
@@ -81,8 +60,8 @@ static void	ft_news(t_bfs *rooms, t_ants *info)
 		j = 0;
 		while (info->tubes[j])
 		{
-			if (ft_strstr(info->tubes[j], rooms->actuals[i]) &&
-			!(ft_tabstr(rooms->olds, info->tubes[j], 2)) && !(ft_tabchr(rooms->news, info->tubes[j])))
+			if (ft_tubestr(info->tubes[j], rooms->actuals[i]) &&
+			!(ft_test(rooms->olds, info->tubes[j])) && !(ft_tabchr(rooms->news, info->tubes[j])))
 			{
 				rooms->news[n - 1] = info->tubes[j];
 				n++;
@@ -95,38 +74,31 @@ static void	ft_news(t_bfs *rooms, t_ants *info)
 	}
 }
 
-char		*ft_find_dawae(t_ants *info, int ants, int end, int start)
+char		*ft_find_dawae(t_ants *info, int ants)
 {
 	int		i;
 	char	*str;
 	t_bfs	rooms;
 
 	ft_bzero(&rooms, sizeof(t_bfs));
-	str = ft_where_is_my_ant(info, ants, end, start);
+	str = ft_where_is_my_ant(info, ants);
 	rooms.actuals = (char **)ft_memalloc(sizeof(char *) * 2);
-	rooms.actuals[0] = info->names[end];
+	rooms.actuals[0] = info->names[info->nb_end];
 	rooms.actuals[1] = NULL;
 	rooms.olds = (char **)ft_memalloc(sizeof(char *) * 1);
 	rooms.olds[0] = NULL;
 	while (!ft_tabchr(rooms.actuals, str))
 	{
 		i = 0;
-		ft_luigi(&rooms);
 		ft_news(&rooms, info);
+		ft_olds(&rooms, info);
 		while (rooms.news[i])
 		{
-			if (ft_strstr(rooms.news[i], str) &&
+			if (ft_tubestr(rooms.news[i], str) &&
 			ft_check_ant(info, ft_link(str, rooms.news[i], info)))
 				return (ft_link(str, rooms.news[i], info));
 			i++;
 		}
-		ft_olds(&rooms, info);
 	}
-//	while (rooms.news[i])
-//	{
-//		if (ft_strstr(rooms.news[i], str))
-//			return (ft_link(str, rooms.news[i], info));
-//		i++;
-//	}
 	return (NULL);
 }

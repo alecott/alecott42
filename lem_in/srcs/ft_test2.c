@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabjoin.c                                       :+:      :+:    :+:   */
+/*   ft_test2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/23 17:02:11 by alecott           #+#    #+#             */
-/*   Updated: 2018/02/27 16:15:20 by alecott          ###   ########.fr       */
+/*   Created: 2018/03/02 13:39:51 by alecott           #+#    #+#             */
+/*   Updated: 2018/03/02 13:49:47 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../lem_in.h"
 
-char	**ft_tabjoin(char **tab1, char **tab2)
+int		ft_test2(char **tubes, char *room)
 {
 	int		i;
-	int		j;
-	char	**ret;
 
 	i = 0;
-	j = 0;
-	if (tab1 == NULL || tab2 == NULL)
-		return (NULL);
-	if ((ret = (char **)ft_memalloc(sizeof(char *) *
-			(ft_tablen(tab1) + ft_tablen(tab2) + 1))) == NULL)
-		return (NULL);
-	while (tab1[i])
+	while (tubes[i])
 	{
-		ret[i] = tab1[i];
+		if (ft_tubestr(tubes[i], room))
+			return (1);
 		i++;
 	}
-	while (tab2[j])
-	{
-		ret[i + j] = tab2[j];
-		j++;
-	}
-	ret[i + j] = NULL;
-	return (ret);
+	return (0);
 }

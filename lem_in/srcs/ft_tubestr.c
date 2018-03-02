@@ -6,13 +6,13 @@
 /*   By: rkrief <rkrief@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:14:50 by rkrief            #+#    #+#             */
-/*   Updated: 2018/02/28 18:16:19 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/03/02 11:35:13 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-static void     ft_tubestr2(char *s1, char *s2, int *i, int *j)
+static void	ft_tubestr2(char *s1, char *s2, int *i, int *j)
 {
 	*i = 0;
 	*j = 0;
@@ -24,7 +24,7 @@ static void     ft_tubestr2(char *s1, char *s2, int *i, int *j)
 	}
 }
 
-int             ft_tubestr(char *s1, char *s2)
+int			ft_tubestr(char *s1, char *s2)
 {
 	int i;
 	int j;
