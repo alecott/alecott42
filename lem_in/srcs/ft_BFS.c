@@ -39,7 +39,6 @@ static void	ft_print(int ants, char *s1)
 		write (1, " ", 1);
 }
 
-
 static void	ft_gestion(t_ants *info, int ants)
 {
 	char	*s1;
@@ -64,7 +63,7 @@ static void	ft_gestion(t_ants *info, int ants)
 
 void		ft_BFS(t_ants *info)
 {
-	int		ants;
+	int			ants;
 
 	info->nb_end = ft_room_number(info, info->end);
 	info->nb_start = ft_room_number(info, info->start);

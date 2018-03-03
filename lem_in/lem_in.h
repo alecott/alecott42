@@ -31,9 +31,9 @@ typedef struct	s_ants
 
 typedef struct	s_bfs
 {
-	char	**olds;
-	char	**actuals;
 	char	**news;
+	char	**actuals;
+	char	**olds;
 }				t_bfs;
 
 void	ft_lem_in(t_ants *info);

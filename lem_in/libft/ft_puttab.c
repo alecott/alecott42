@@ -19,7 +19,8 @@ void	ft_puttab(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		ft_putendl(tab[i]);
+		ft_putstr(tab[i]);
+		ft_putchar(' ');
 		i++;
 	}
 }

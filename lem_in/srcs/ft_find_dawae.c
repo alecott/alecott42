@@ -12,7 +12,7 @@
 
 #include "../lem_in.h"
 
-static void	ft_actuals(t_bfs *rooms, t_ants *info)
+static void	ft_actuals(t_bfs *rooms, t_ants *info, char *str)
 {
 	int		i;
 	int		n;
@@ -24,7 +24,7 @@ static void	ft_actuals(t_bfs *rooms, t_ants *info)
 	while (info->names[i])
 	{
 		if (ft_test2(rooms->news, info->names[i]) &&
-			!ft_tabchr(rooms->olds, info->names[i]))
+			!ft_tabchr(rooms->olds, info->names[i]) && !ft_strequ(info->names[i], str))
 		{
 			rooms->actuals[n - 1] = info->names[i];
 			n++;
@@ -35,7 +35,7 @@ static void	ft_actuals(t_bfs *rooms, t_ants *info)
 	rooms->actuals[n - 1] = NULL;
 }
 
-static void	ft_olds(t_bfs *rooms, t_ants *info)
+static void	ft_olds(t_bfs *rooms, t_ants *info, char *str)
 {
 	char	**tmp;
 
@@ -43,7 +43,7 @@ static void	ft_olds(t_bfs *rooms, t_ants *info)
 	rooms->olds = tmp;
 	tmp = NULL;
 	ft_memdel((void **)&tmp);
-	ft_actuals(rooms, info);
+	ft_actuals(rooms, info, str);
 }
 
 static void	ft_news(t_bfs *rooms, t_ants *info)
@@ -54,6 +54,8 @@ static void	ft_news(t_bfs *rooms, t_ants *info)
 
 	i = 0;
 	n = 1;
+	if (rooms->news)
+		ft_memdel((void**)&rooms->news);
 	rooms->news = (char**)ft_memalloc(sizeof(char*) * n);
 	while (rooms->actuals[i] != NULL)
 	{
@@ -77,6 +79,8 @@ static void	ft_news(t_bfs *rooms, t_ants *info)
 char		*ft_find_dawae(t_ants *info, int ants)
 {
 	int		i;
+	int		n;
+	int		x;
 	char	*str;
 	t_bfs	rooms;
 
@@ -87,16 +91,24 @@ char		*ft_find_dawae(t_ants *info, int ants)
 	rooms.actuals[1] = NULL;
 	rooms.olds = (char **)ft_memalloc(sizeof(char *) * 1);
 	rooms.olds[0] = NULL;
-	while (!ft_tabchr(rooms.actuals, str))
+	n = 0;
+	x = 0;
+	while (rooms.actuals && n <= ants)
 	{
 		i = 0;
 		ft_news(&rooms, info);
-		ft_olds(&rooms, info);
+		ft_olds(&rooms, info, str);
+		if (x != 0)
+			n++;
 		while (rooms.news[i])
 		{
-			if (ft_tubestr(rooms.news[i], str) &&
-			ft_check_ant(info, ft_link(str, rooms.news[i], info)))
-				return (ft_link(str, rooms.news[i], info));
+			if (ft_tubestr(rooms.news[i], str))
+			{
+			if (!ft_check_ant(info, ft_link(str, rooms.news[i], info)))
+					x = 1;
+				else
+					return (ft_link(str, rooms.news[i], info));
+			}
 			i++;
 		}
 	}
