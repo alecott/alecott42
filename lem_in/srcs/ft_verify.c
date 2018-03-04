@@ -6,7 +6,7 @@
 /*   By: rkrief <rkrief@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:14:50 by rkrief            #+#    #+#             */
-/*   Updated: 2018/03/02 11:34:00 by alecott          ###   ########.fr       */
+/*   Updated: 2018/03/04 10:59:00 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,17 @@ static int	ft_chck(char **stock, char *check)
 static void	ft_fill(char **res, char *look, char **stock, int *j)
 {
 	int i;
-
+	char *tmp;
 	i = 0;
 	while (i < ft_tablen(res))
 	{
-		if (ft_tubret(res[i], look) && !ft_chck(stock, ft_tubret(res[i], look)))
+		tmp = ft_tubret(res[i], look);
+		if (tmp && !ft_chck(stock, tmp))
 		{
 			stock[*j] = ft_tubret(res[i], look);
 			*j = *j + 1;
 		}
+		ft_strdel(&tmp);
 		i++;
 	}
 }
@@ -117,5 +119,6 @@ int			ft_verify(char *start, char *end, t_ants *info)
 	i = 0;
 	while (i < ft_tablen(info->names))
 		ft_strdel(&stock[i++]);
+	free(stock);
 	return (so);
 }

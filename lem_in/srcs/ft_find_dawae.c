@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 13:19:12 by alecott           #+#    #+#             */
-/*   Updated: 2018/03/02 17:12:00 by alecott          ###   ########.fr       */
+/*   Updated: 2018/03/04 13:35:57 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ static void	ft_actuals(t_bfs *rooms, t_ants *info, char *str)
 static void	ft_olds(t_bfs *rooms, t_ants *info, char *str)
 {
 	char	**tmp;
+	int	i;
 
+	i = 0;
 	tmp = ft_tabjoin(rooms->olds, rooms->actuals);
+	while (rooms->olds[i])
+	{
+		ft_strdel(&(rooms->olds[i]));
+		i++;
+	}
+	free (rooms->olds);
 	rooms->olds = tmp;
-	tmp = NULL;
-	ft_memdel((void **)&tmp);
 	ft_actuals(rooms, info, str);
 }
 
@@ -112,5 +118,11 @@ char		*ft_find_dawae(t_ants *info, int ants)
 			i++;
 		}
 	}
+	i = 0;
+	while (rooms.olds[i])
+		ft_strdel(&rooms.olds[i++]);
+	free(rooms.olds);
+	free(rooms.actuals);
+	free(rooms.news);
 	return (NULL);
 }
