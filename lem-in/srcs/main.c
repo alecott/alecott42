@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:57:46 by alecott           #+#    #+#             */
-/*   Updated: 2018/04/25 17:22:24 by alecott          ###   ########.fr       */
+/*   Updated: 2018/04/27 09:33:08 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,11 @@ static void	ft_print(t_ants *info)
 		i++;
 	}
 	i = 0;
-//	while (info->names[i])
-//	{
-//		ft_putendl(info->names[i]);
-//		i++;
-//	}
-//	i = 0;
 	while (info->tubes[i])
 	{
 		ft_putendl(info->tubes[i]);
 		i++;
 	}
-//	ft_putstr("start= ");
-//	ft_putendl(info->start);
-//	ft_putstr("end= ");
-//	ft_putendl(info->end);
 }
 
 int			main(void)
@@ -60,6 +50,7 @@ int			main(void)
 		return (0);
 	}
 	ft_print(&info);
-	ft_fill_path(info);
+	ft_fill_path(&info);
+	while (1);
 	return (0);
 }
