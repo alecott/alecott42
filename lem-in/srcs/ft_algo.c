@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:06:46 by alecott           #+#    #+#             */
-/*   Updated: 2018/04/27 17:01:19 by alecott          ###   ########.fr       */
+/*   Updated: 2018/04/30 09:30:17 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,12 @@ static int	ft_pathcmp(char *path1, char *path2)
 	return (0);
 }
 
-static int	ft_opti_path(t_ants *info, char *path, int ants)
+static int	ft_opti_path(t_ants *info, char *path)
 {
 //check si le chemin est valide est qu'il est optimise pour la fourmis
 	int		i;
 
-	i = ants - ants; //i = 0;
+	i = 0;
 	while (info->path_ant[i])
 	{
 		if (info->path_ant[i] != NULL)
@@ -126,10 +126,10 @@ static void	ft_ant_path(int ants, t_ants *info, char **all_paths)
 	i = 0;
 	while (all_paths[i])
 	{
-		if (ft_opti_path(info, all_paths[i], ants))
+		if (ft_opti_path(info, all_paths[i]))
 		{
 			info->path_ant[ants] = ft_strdup(all_paths[i]);
-			return ;
+			return;
 		}
 		i++;
 	}
@@ -148,15 +148,12 @@ void		ft_algo(t_ants *info, char **all_paths)
 		ants = 0;
 		while (ants < info->nb_ant)
 		{
-			if (info->path_ant[ants] == NULL)
-				ft_ant_path(ants, info, all_paths);
+			if (info->path_ant[ants] != NULL)
+				ft_moove(ants, info);
 			else
-			{
-				if (ft_finished(ants, info))
+				ft_ant_path(ants, info, all_paths);
+			if (ft_finished(ants, info))
 					over++;
-				else
-					ft_moove(ants, info);
-			}
 			ants++;
 		}
 		ft_putchar('\n');
