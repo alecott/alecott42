@@ -6,24 +6,18 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:44:09 by rkrief            #+#    #+#             */
-/*   Updated: 2018/04/30 18:11:20 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/03 14:13:08 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-int		ft_check_path(char *path, char **allpath)
+void		ft_free_tab(char **tab)
 {
 	int i;
 
 	i = 0;
-	if (allpath == NULL)
-		return (0);
-	while (allpath[i])
-	{
-		if (ft_strequ(path, allpath[i]))
-			return (1);
-		i++;
-	}
-	return (0);
+	while (tab[i])
+		ft_strdel(&tab[i++]);
+	ft_memdel((void**)tab);
 }

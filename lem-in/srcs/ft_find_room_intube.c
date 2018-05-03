@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:44:09 by rkrief            #+#    #+#             */
-/*   Updated: 2018/04/26 12:59:20 by Raphael          ###   ########.fr       */
+/*   Updated: 2018/04/30 18:14:50 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ft_find_room_intube(char *room, char *link)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	int		k;
 	char	*res;
 

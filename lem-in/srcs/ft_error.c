@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 15:50:21 by alecott           #+#    #+#             */
-/*   Updated: 2018/03/02 14:03:36 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/03 15:50:37 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,10 @@ static int	ft_error3(t_ants *info)
 		ft_strdel(&str);
 		i++;
 	}
-//	return (1);
 	return (ft_verify(info->start, info->end, info));
 }
 
-static int	ft_error2(t_ants *info)
+int			ft_error(t_ants *info)
 {
 	int		i;
 	int		j;
@@ -97,32 +96,4 @@ static int	ft_error2(t_ants *info)
 		i++;
 	}
 	return (ft_error3(info));
-}
-
-int			ft_error(t_ants *info)
-{
-	int		i;
-	int		n;
-	int		j;
-	int		k;
-
-	if (!ft_norm(info, &i, &j, &n))
-		return (0);
-	while (info->names[j])
-	{
-		k = 0;
-		while (info->tubes[k])
-		{
-			if (ft_tubestr(info->tubes[k], info->names[j]))
-			{
-				n++;
-				break ;
-			}
-			k++;
-		}
-		j++;
-	}
-	if (n != i)
-		return (0);
-	return (ft_error2(info));
 }

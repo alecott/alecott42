@@ -6,13 +6,13 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:44:09 by rkrief            #+#    #+#             */
-/*   Updated: 2018/04/27 16:45:40 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/03 14:15:50 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-void	ft_save_path_ifrepeat(t_ants *info, char **clonepath)
+static void		ft_save_path_ifrepeat(t_ants *info, char **clonepath)
 {
 	info->nb_repeat++;
 	if (info->nb_repeat > info->nb_tubes / 2)
@@ -24,7 +24,7 @@ void	ft_save_path_ifrepeat(t_ants *info, char **clonepath)
 	}
 }
 
-void	ft_initializeb(t_ants *info, int *i)
+static void		ft_initializeb(t_ants *info, int *i)
 {
 	*i = 0;
 	info->nb_repeat = 0;
@@ -37,12 +37,12 @@ void	ft_initializeb(t_ants *info, int *i)
 	info->k = info->nb_tubes * 10;
 }
 
-void	ft_into_the_while(char *tmp, int *i, char **allpath, t_ants *info)
+static void		ft_into_the_while(char *tmp, int *i, char **p, t_ants *info)
 {
 	tmp = ft_get_room(info->room, info->tubes_names[*i]);
 	if (ft_find_room_intube(info->room, info->tubes_names[*i]) &&
-	(!ft_check_ifexist(tmp, info->path)) &&
-(!ft_find_room_intube(info->rm, info->tubes_names[*i])))
+			(!ft_check_ifexist(tmp, info->path)) &&
+			(!ft_find_room_intube(info->rm, info->tubes_names[*i])))
 	{
 		info->path = ft_complete_path(info->path, info->room, *i, *info);
 		if (info->room)
@@ -50,7 +50,7 @@ void	ft_into_the_while(char *tmp, int *i, char **allpath, t_ants *info)
 		info->room = tmp;
 		if (ft_strequ(info->room, info->end))
 		{
-			ft_add_and_delete(info, allpath);
+			ft_add_and_delete(info, p);
 			*i = -1;
 		}
 	}
@@ -59,16 +59,16 @@ void	ft_into_the_while(char *tmp, int *i, char **allpath, t_ants *info)
 	*i = *i + 1;
 }
 
-char	**ft_findlink(t_ants *info, char **allpath)
+static char		**ft_findlink(t_ants *info, char **allpath)
 {
 	char	*tmp;
 	char	**clonepath;
-	int	clonem;
-	int	i;
+	int		clonem;
+	int		i;
 
 	tmp = NULL;
 	ft_initializeb(info, &i);
-	clonepath = (char**)ft_memalloc(sizeof(char*) * (200));
+	clonepath = (char**)ft_memalloc(sizeof(char*) * (info->nb_tubes * 10));
 	while (info->k)
 	{
 		while (info->tubes_names[i])
@@ -86,31 +86,25 @@ char	**ft_findlink(t_ants *info, char **allpath)
 	return (allpath);
 }
 
-void	ft_fill_path(t_ants *info)
+void			ft_fill_path(t_ants *info)
 {
-	int 	i;
+	int		i;
 	char	**path;
 	char	**allpath;
 
-	i = 0;
-	allpath = (char**)ft_memalloc(sizeof(char*) * (500 + 1));
+	info->tmp = NULL;
 	ft_find_nb_tubes(info);
+	allpath = (char**)ft_memalloc(sizeof(char*) * (info->nb_tubes * 10));
 	ft_find_nbroom(info);
 	path = ft_findlink(info, allpath);
-	path = ft_sort_paths(path);
-/*	while(path[i])
-		ft_strdel(&path[i++]);
-	ft_memdel((void**)path);
-	i = 0;
-	while(allpath[i])
-		ft_strdel(&allpath[i++]);
-	ft_memdel((void**)allpath);
-	path = ft_sort_paths(path);*/
+	info->tmpp = path;
+	path = ft_sort_paths(info->tmpp);
 	i = 0;
 	while (path[i])
 	{
-		path[i] = ft_sub_path(path[i]);
-		printf("allpath[i] = %s\n", path[i++]);
+		info->tmp = path[i];
+		path[i++] = ft_sub_path(info->tmp);
+		ft_strdel(&info->tmp);
 	}
-	ft_algo(info, path);
+	ft_nextoffind(info, path);
 }

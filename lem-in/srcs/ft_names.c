@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 10:13:15 by alecott           #+#    #+#             */
-/*   Updated: 2018/04/10 10:33:51 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/03 15:26:27 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,61 +28,59 @@ static int	ft_nbrooms(t_ants *info)
 	return (len);
 }
 
-static void	ft_end(t_ants *info)
+static int	ft_end(t_ants *info)
 {
 	int		i;
-	int		j;
 	size_t	len;
 
 	len = 0;
 	i = 0;
-	j = 0;
 	while (info->rooms[i])
 	{
 		if (ft_strequ(info->rooms[i], "##end"))
 		{
-			while (info->rooms[i + 1][len] != ' ')
-				len++;
-			while (info->names[j])
+			if (info->end != NULL)
+				return (0);
+			if (info->rooms[i + 1][0] != '#')
 			{
-				if (ft_strnequ(info->names[j], info->rooms[i + 1], len))
-					info->end = info->names[j];
-				j++;
+				while (info->rooms[i + 1][len] != ' ')
+					len++;
+				info->end = ft_strsubinv(info->rooms[i + 1], len);
 			}
 		}
 		i++;
 	}
+	if (info->end == NULL)
+		return (0);
+	return (1);
 }
 
-static void	ft_start(t_ants *info)
+static int	ft_start(t_ants *info)
 {
 	int		i;
-	int		j;
 	size_t	len;
 
 	len = 0;
 	i = 0;
-	j = 0;
 	while (info->rooms[i])
 	{
 		if (ft_strequ(info->rooms[i], "##start"))
 		{
-			while (info->rooms[i + 1][len] != ' ')
-				len++;
-			while (info->names[j])
+			if (info->start != NULL)
+				return (0);
+			if (info->rooms[i + 1][0] != '#')
 			{
-				if (ft_strnequ(info->names[j], info->rooms[i + 1], len) && 
-					info->rooms[i + 1][len] == ' ')
-					info->start = info->names[j];
-				j++;
+				while (info->rooms[i + 1][len] != ' ')
+					len++;
+				info->start = ft_strsubinv(info->rooms[i + 1], len);
 			}
 		}
 		i++;
 	}
-	ft_end(info);
+	return (ft_end(info));
 }
 
-void		ft_names(t_ants *info)
+int			ft_names(t_ants *info)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -105,5 +103,5 @@ void		ft_names(t_ants *info)
 		i++;
 	}
 	info->names[j] = NULL;
-	ft_start(info);
+	return (ft_start(info));
 }

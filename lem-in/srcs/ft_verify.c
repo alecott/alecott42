@@ -6,7 +6,7 @@
 /*   By: rkrief <rkrief@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:14:50 by rkrief            #+#    #+#             */
-/*   Updated: 2018/03/05 17:13:24 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/03 16:17:12 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	*ft_cut(char *s1)
 {
-	int i;
-	char *res;
+	int		i;
+	char	*res;
 
 	i = 0;
 	while (s1[i] != '-')
@@ -23,7 +23,7 @@ static char	*ft_cut(char *s1)
 	res = (char*)ft_memalloc(sizeof(char) * (i + 2));
 	i = 0;
 	while (s1[i] != '-')
-	{	
+	{
 		res[i] = s1[i];
 		i++;
 	}
@@ -65,29 +65,16 @@ static char	*ft_tubret(char *s1, char *s2)
 	return (NULL);
 }
 
-static int	ft_chck(char **stock, char *check)
-{
-	int	i;
-
-	i = 0;
-	while (stock[i])
-	{
-		if (ft_strequ(stock[i], check))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 static void	ft_fill(char **res, char *look, char **stock, int *j)
 {
-	int i;
-	char *tmp;
+	int		i;
+	char	*tmp;
+
 	i = 0;
 	while (i < ft_tablen(res))
 	{
 		tmp = ft_tubret(res[i], look);
-		if (tmp && !ft_chck(stock, tmp))
+		if (tmp && !ft_tabchr(stock, tmp))
 		{
 			stock[*j] = ft_tubret(res[i], look);
 			*j = *j + 1;
@@ -98,11 +85,11 @@ static void	ft_fill(char **res, char *look, char **stock, int *j)
 }
 
 int			ft_verify(char *start, char *end, t_ants *info)
-{	
-	char **stock;
-	int i;
-	int j;
-	int so;
+{
+	char	**stock;
+	int		i;
+	int		j;
+	int		so;
 
 	j = 0;
 	i = 1;
@@ -115,7 +102,7 @@ int			ft_verify(char *start, char *end, t_ants *info)
 		ft_fill(info->tubes, stock[j], stock, &i);
 		j++;
 	}
-	so = ft_chck(stock, end);
+	so = ft_tabchr(stock, end);
 	i = 0;
 	while (i < ft_tablen(info->names))
 		ft_strdel(&stock[i++]);

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:57:46 by alecott           #+#    #+#             */
-/*   Updated: 2018/04/27 09:33:08 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/03 15:26:00 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,26 @@ static void	ft_print(t_ants *info)
 int			main(void)
 {
 	t_ants	info;
+	int		i;
 
 	ft_bzero(&info, sizeof(t_ants));
-	if (!ft_stock(&info))
+	if (!ft_stock(&info) || !ft_names(&info))
 	{
-		ft_putstr("ERROR1");
+		ft_putstr("ERROR");
 		return (0);
 	}
-	ft_names(&info);
 	ft_tubes_names(&info);
 	if (!ft_error(&info))
 	{
-		ft_putstr("ERROR2");
+		ft_putstr("ERROR");
 		return (0);
 	}
 	ft_print(&info);
 	ft_fill_path(&info);
-	while (1);
+	i = 0;
+	while (info.ultim_path[i])
+		ft_strdel(&info.ultim_path[i++]);
+	ft_memdel((void**)info.ultim_path);
+	free(info.ultim_path);
 	return (0);
 }

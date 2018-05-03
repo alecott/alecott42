@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_norm.c                                          :+:      :+:    :+:   */
+/*   ft_copy_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkrief <rkrief@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/28 13:34:52 by rkrief            #+#    #+#             */
-/*   Updated: 2018/02/28 13:37:30 by rkrief           ###   ########.fr       */
+/*   Created: 2018/05/02 12:59:22 by rkrief            #+#    #+#             */
+/*   Updated: 2018/05/02 13:05:41 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem_in.h"
+#include "libft.h"
 
-int	ft_norm(t_ants *info, int *i, int *j, int *n)
+char		**ft_copy_tab(char **tab)
 {
-	*i = ft_tablen(info->names);
-	*j = 0;
-	*n = 0;
-	if (info->nb_ant < 0)
-		return (0);
-	if (info->start == NULL || info->end == NULL)
-		return (0);
-	return (1);
+	int		i;
+	char	**final;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	final = (char**)ft_memalloc(sizeof(char*) * (i + 1));
+	i = 0;
+	while (tab[i])
+	{
+		final[i] = ft_strdup(tab[i]);
+		i++;
+	}
+	return (final);
 }

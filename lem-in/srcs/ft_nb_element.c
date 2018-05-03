@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_path.c                                     :+:      :+:    :+:   */
+/*   ft_ultim_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 16:44:09 by rkrief            #+#    #+#             */
-/*   Updated: 2018/04/30 18:11:20 by rkrief           ###   ########.fr       */
+/*   Created: 2018/05/01 10:51:05 by rkrief            #+#    #+#             */
+/*   Updated: 2018/05/03 14:19:37 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-int		ft_check_path(char *path, char **allpath)
+int		ft_nb_element(char **tab)
 {
 	int i;
 
 	i = 0;
-	if (allpath == NULL)
-		return (0);
-	while (allpath[i])
-	{
-		if (ft_strequ(path, allpath[i]))
-			return (1);
+	while (tab[i])
 		i++;
-	}
-	return (0);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 08:48:09 by alecott           #+#    #+#             */
-/*   Updated: 2018/04/20 12:32:52 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/02 13:00:22 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct	s_fd_tracker
 size_t			ft_strlen(const char *str);
 char			*ft_strdup(const char *src);
 char			*ft_strcpy(char *dst, const char *src);
-char        	*ft_strndup(const char *s1, size_t n);
+char			*ft_strndup(const char *s1, size_t n);
+char			*ft_strnmdup(char *str, int start, int end);
 char			*ft_strncpy(char *dst, const char *src, size_t n);
 char			*ft_strstr(const char *s1, const char *s2);
 char			*ft_strnstr(const char *s1, const char *s2, size_t n);
@@ -111,5 +112,6 @@ int				ft_tabchr(char **tab, const char *s);
 int				ft_tabstr(char **tab, const char *s, int mode);
 void			ft_puttab(char **tab);
 char			**ft_tabdup(char **tab);
+char			**ft_copy_tab(char **tab);
 
 #endif

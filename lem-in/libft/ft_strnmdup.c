@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fill_path.c                                     :+:      :+:    :+:   */
+/*   ft_opti_allpaths.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 16:44:09 by rkrief            #+#    #+#             */
-/*   Updated: 2018/04/30 18:11:20 by rkrief           ###   ########.fr       */
+/*   Created: 2018/04/30 08:50:08 by alecott           #+#    #+#             */
+/*   Updated: 2018/05/02 12:52:18 by rkrief           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem_in.h"
+#include "libft.h"
 
-int		ft_check_path(char *path, char **allpath)
+char	*ft_strnmdup(char *str, int start, int end)
 {
-	int i;
+	char	*clone;
+	int		i;
 
 	i = 0;
-	if (allpath == NULL)
+	if ((clone = (char*)ft_memalloc(sizeof(char) * (end - start + 1))) == 0)
 		return (0);
-	while (allpath[i])
+	while (start < end)
 	{
-		if (ft_strequ(path, allpath[i]))
-			return (1);
+		clone[i] = str[start];
+		start++;
 		i++;
 	}
-	return (0);
+	return (clone);
 }
