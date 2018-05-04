@@ -107,7 +107,7 @@ int			ft_stock(t_ants *info)
 	n = 1;
 	i = 0;
 	get_next_line(0, &line);
-	if (line == NULL)
+	if (line == NULL || !ft_atoi(line))
 		return (0);
 	info->nb_ant = ft_atoi(line);
 	ft_strdel(&line);
