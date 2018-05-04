@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/08 10:13:15 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/03 15:26:27 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/04 09:37:03 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static int	ft_start(t_ants *info)
 		}
 		i++;
 	}
+	if (info->start == NULL)
+		return (0);
 	return (ft_end(info));
 }
 

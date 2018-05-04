@@ -6,7 +6,7 @@
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 10:53:24 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/03 14:51:12 by alecott          ###   ########.fr       */
+/*   Updated: 2018/05/04 12:07:47 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int			ft_stock(t_ants *info)
 	n = 1;
 	i = 0;
 	get_next_line(0, &line);
+	if (line == NULL)
+		return (0);
 	info->nb_ant = ft_atoi(line);
 	ft_strdel(&line);
 	info->rooms = (char**)ft_memalloc(sizeof(char*) * (n + 1));
