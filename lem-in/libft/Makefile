@@ -6,7 +6,7 @@
 #    By: alecott <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/20 15:48:20 by alecott           #+#    #+#              #
-#    Updated: 2018/05/02 13:02:58 by rkrief           ###   ########.fr        #
+#    Updated: 2018/05/16 14:48:20 by alecott          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SOURCES = ft_atoi.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_memset.c \
 		  get_next_line.c ft_strsubinv.c ft_tablen.c ft_realloc.c ft_tabjoin.c \
 		  ft_tabchr.c ft_tabstr.c ft_puttab.c ft_tabdup.c ft_strndup.c ft_strnmdup.c ft_copy_tab.c \
 
-OBJETS = $(SOURCES:.c=.o) 
+OBJETS = $(SOURCES:.c=.o)
 
 INC = libft.h
 
