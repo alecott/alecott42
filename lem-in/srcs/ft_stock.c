@@ -58,6 +58,8 @@ static int	ft_istubes(char *str)
 
 	i = 0;
 	n = 0;
+	if (str == NULL)
+		return (0);
 	if (str[0] == '#')
 		return (1);
 	while (ft_isprint(str[i]))
