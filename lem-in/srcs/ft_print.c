@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_paths.c                                    :+:      :+:    :+:   */
+/*   ft_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alecott <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/27 11:36:22 by alecott           #+#    #+#             */
-/*   Updated: 2018/05/30 12:19:13 by alecott          ###   ########.fr       */
+/*   Created: 2018/05/30 13:03:06 by alecott           #+#    #+#             */
+/*   Updated: 2018/05/30 13:04:59 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lem_in.h"
 
-char	**ft_sort_paths(char **path)
+void	ft_print(t_ants *info)
 {
 	int		i;
-	char	*tmp;
 
+	ft_putnbr(info->nb_ant);
+	write(1, "\n", 1);
 	i = 0;
-	if (path == NULL)
-		return (NULL);
-	while (path[i])
+	while (info->rooms[i])
 	{
-		if (path[i + 1])
-		{
-			if (ft_nbrooms_in_path(path[i]) > ft_nbrooms_in_path(path[i + 1]))
-			{
-				tmp = path[i];
-				path[i] = path[i + 1];
-				path[i + 1] = tmp;
-				i = -1;
-			}
-		}
+		ft_putendl(info->rooms[i]);
 		i++;
 	}
-	return (path);
+	i = 0;
+	while (info->tubes[i])
+	{
+		ft_putendl(info->tubes[i]);
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: rkrief <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:44:09 by rkrief            #+#    #+#             */
-/*   Updated: 2018/05/03 14:13:08 by rkrief           ###   ########.fr       */
+/*   Updated: 2018/05/30 13:03:45 by alecott          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	ft_nextoffind(t_ants *info, char **path)
 	info->tmp1 = path;
 	ft_ultim_path(info, path);
 	info->tmpp = info->ultim_path;
+	if (info->tmpp == NULL)
+	{
+		ft_putstr("ERROR");
+		return ;
+	}
+	ft_print(info);
 	info->ultim_path = ft_sort_paths(info->tmpp);
 	info->room_ant = (char**)ft_memalloc(sizeof(char*) * (info->nb_ant + 1));
 	info->path_ant = (char**)ft_memalloc(sizeof(char*) * (info->nb_ant + 1));
