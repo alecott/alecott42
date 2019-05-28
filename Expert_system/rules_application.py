@@ -4,7 +4,6 @@ def replace_condition(tab_tmp,tab,x,y):
     tmp = resolve_rule(tab_tmp)
     tab.insert(x,tmp[0])
     del(tab[x+1:y+2])
-    print(tab)
     return(tab)
 
 def handle_parentheses(tab):
@@ -69,16 +68,21 @@ def begin(dic):
     for rule in dic["rules"]:
         c_rule = clean_rule(rule)
         tab_tmp = create_tab(c_rule["condition"])
+        tab_conclusion = create_tab(c_rule["conclusion"])
         tab = []
         for elem in tab_tmp:
             if (elem.isupper()):
                 elem = put_boolean(elem,dic)
             tab.append(elem)
-        print ("\n\n","-Starting to resolve the rule:",rule,c_rule,"\n",tab_tmp,"\n",tab)
+        print ("\n\n","-Starting to resolve the rule:",rule,'\n',c_rule,"\n","Resolving condition","\n",tab_tmp,"\n",tab)
         ret = resolve_rule(tab)
-        if (len(c_rule["conclusion"]) == 1):
+        if (len(tab_conclusion) == 1):
             dic["facts"][c_rule["conclusion"]] = ret[0]
+            print('\n',c_rule["conclusion"],'=',ret[0],'\n',dic['facts'],'\n\n')
+        elif(len(tab_conclusion) == 3):
+            tab_conclusion = create_tab(c_rule["conclusion"])
+            dic["facts"] = resolve_condition.resolve_conclusion(ret[0],tab_conclusion,dic["facts"])
         else:
-            resolve
-        print('\n',c_rule["conclusion"],'=',ret[0],'\n',dic['facts'],'\n\n')
+            print("Error: Conclusion of",rule,"rule is to complex")
+            sys.exit(1)
     return(dic)

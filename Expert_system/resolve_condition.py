@@ -29,4 +29,10 @@ def resolve_condition(ret):
         del(ret[1:3])
     return(ret)
 
-def resolve_conclusion(ret):
+def resolve_conclusion(ret,conclusion,facts):
+    if (conclusion[1] == '+'):
+        facts[conclusion[0]] = ret
+        facts[conclusion[2]] = ret
+    print('\n',conclusion[0],'=',ret,'\n',facts)
+    print('\n',conclusion[2],'=',ret,'\n',facts,'\n\n')
+    return(facts)
