@@ -43,8 +43,10 @@ def main():
             lines = p.readlines()
     except NameError:
         print("Error : Wrong number of parameter(must be one)")
+        sys.exit(1)
     except OSError:
         print("Error : Can't open the parameter")
+        sys.exit(1)
     my_dic = parsing(lines)
     print(my_dic)
     ret_dic = rules_application.begin(my_dic)

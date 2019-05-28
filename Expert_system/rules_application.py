@@ -3,7 +3,7 @@ import resolve_condition
 def replace_condition(tab_tmp,tab,x,y):
     tmp = resolve_rule(tab_tmp)
     tab.insert(x,tmp[0])
-    del(tab[x:y+2])
+    del(tab[x+1:y+2])
     print(tab)
     return(tab)
 
@@ -15,7 +15,9 @@ def handle_parentheses(tab):
                 break
             x += 1
         y = x
-        while(x > 0 or tab[x] != '('):
+        while (x != 0):
+            if (tab[x] == '('):
+                break
             x -= 1
         return(replace_condition(tab[(x+1):y],tab,x,y))
     return(tab)
@@ -25,7 +27,6 @@ def resolve_rule(tab):
         tab = handle_parentheses(tab)
     while (len(tab) != 1):
         tab = resolve_condition.resolve_condition(tab)
-        #print(tab)
     return(tab)
 
 def put_boolean(s,dic):
@@ -40,8 +41,6 @@ def put_boolean(s,dic):
 def create_tab(str):
     tab = []
     tmp = ""
-    if (str[0] == '(' and str[-1] == ')'):
-        str = str[1:-1]
     for c in str:
         tmp = tmp + c
         if (c != '!'):
@@ -75,9 +74,11 @@ def begin(dic):
             if (elem.isupper()):
                 elem = put_boolean(elem,dic)
             tab.append(elem)
-        print ("\n\n",rule,c_rule,"\n",tab_tmp,"\n",tab)
+        print ("\n\n","-Starting to resolve the rule:",rule,c_rule,"\n",tab_tmp,"\n",tab)
         ret = resolve_rule(tab)
         if (len(c_rule["conclusion"]) == 1):
             dic["facts"][c_rule["conclusion"]] = ret[0]
-        print(c_rule["conclusion"],'=',ret[0],'\n',dic['facts'],'\n\n')
+        else:
+            resolve
+        print('\n',c_rule["conclusion"],'=',ret[0],'\n',dic['facts'],'\n\n')
     return(dic)

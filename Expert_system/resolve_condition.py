@@ -25,6 +25,8 @@ def resolve_condition(ret):
         ret[0] = resolve_and(ret)
         del(ret[1:3])
     elif (ret[1] == '^'):
-        ret[0] = resolve_or(ret)
+        ret[0] = resolve_xor(ret)
         del(ret[1:3])
     return(ret)
+
+def resolve_conclusion(ret):
